@@ -1,5 +1,6 @@
 import React from "react";
-import './app-header.css';
+import './app-header/app-header.css';
+
 const AppHeader = ({toDo, done}) => {
     return (
         <div className={"app-header d-flex"}>
@@ -7,7 +8,6 @@ const AppHeader = ({toDo, done}) => {
             <h2>{toDo} more to do, {done} </h2>
         </div>
     );
-
 
 };
 
