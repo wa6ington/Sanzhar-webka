@@ -1,23 +1,40 @@
-import React from 'react';
-import TodoListItem from '../todo-list-item/todo-list-item';
-import './todo-list.css';
+import React, {Component} from 'react';
+import './todo-list-item.css';
 
-const TodoList = ({ todos }) => {
-    const elements = todos.map((item) => {
-        const { id, ...itemProps } = item;
+export default class TodoListItem extends Component {
 
+
+    onLabelClick = () => {
+            console.log(`Done: ${this.props.label}`);
+        };
+
+    render () {
+
+        const { label, important = false } = this.props;
+        const style = {
+            color: important ? 'steelblue' : 'black',
+            fontWeight: important ? 'bold' : 'normal'
+        };
         return (
-            <li key={id} className="list-group-item">
-                <TodoListItem {...itemProps} />
-            </li>
+            <span className="todo-list-item">
+      <span
+          className="todo-list-item-label"
+          style={style}
+          onClick={ this.onLabelClick }>
+        {label}
+      </span>
+
+      <button type="button"
+              className="btn btn-outline-success btn-sm float-right">
+        <i className="fa fa-exclamation" />
+      </button>
+
+      <button type="button"
+              className="btn btn-outline-danger btn-sm float-right">
+        <i className="fa fa-trash-o" />
+      </button>
+    </span>
         );
-    });
+    };
 
-    return (
-        <ul className="list-group todo-list">
-            { elements }
-        </ul>
-    ); // <-- Скобка теперь правильно закрывает return
-};
-
-export default TodoList;
+}
