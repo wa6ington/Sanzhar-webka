@@ -1,40 +1,23 @@
-import React, {Component} from 'react';
-import './todo-list-item.css';
+import React from 'react';
+import TodoListItem from '../todo-list-item/todo-list-item';
+import './todo-list.css';
 
-export default class TodoListItem extends Component {
+const TodoList = ({ todos, onDeleted }) => {
+    const elements = todos.map((item) => {
+        const { id, ...itemProps } = item;
 
-
-    onLabelClick = () => {
-            console.log(`Done: ${this.props.label}`);
-        };
-
-    render () {
-
-        const { label, important = false } = this.props;
-        const style = {
-            color: important ? 'steelblue' : 'black',
-            fontWeight: important ? 'bold' : 'normal'
-        };
         return (
-            <span className="todo-list-item">
-      <span
-          className="todo-list-item-label"
-          style={style}
-          onClick={ this.onLabelClick }>
-        {label}
-      </span>
-
-      <button type="button"
-              className="btn btn-outline-success btn-sm float-right">
-        <i className="fa fa-exclamation" />
-      </button>
-
-      <button type="button"
-              className="btn btn-outline-danger btn-sm float-right">
-        <i className="fa fa-trash-o" />
-      </button>
-    </span>
+            <li key={id} className="list-group-item">
+                <TodoListItem {...itemProps} onDeleted={() => onDeleted(id)} />
+            </li>
         );
-    };
+    });
 
-}
+    return (
+        <ul className="list-group todo-list">
+            {elements}
+        </ul>
+    );
+};
+
+export default TodoList; // ✅ Добавили экспорт
