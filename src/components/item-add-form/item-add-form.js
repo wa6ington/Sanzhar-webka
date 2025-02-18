@@ -14,9 +14,9 @@ export default class ItemAddForm extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        if (this.state.label.trim()) { // Проверка на пустую строку
+        if (this.state.label.trim()) { // Проверяем, чтобы не добавлялись пустые элементы
             this.props.onItemAdded(this.state.label);
-            this.setState({ label: '' }); // Очистка input после добавления
+            this.setState({ label: '' }); // Очищаем input после добавления
         }
     };
 
@@ -28,11 +28,11 @@ export default class ItemAddForm extends Component {
                     className="form-control"
                     onChange={this.onLabelChange}
                     placeholder="What needs to be done"
-                    value={this.state.label} // Управляемый input
+                    value={this.state.label} 
                 />
-                <button className="btn btn-outline-secondary">
+                <button type="submit" className="btn btn-outline-secondary">
                     Add Item
-                </button>
+                </button> 
             </form>
         );
     }
